@@ -7,6 +7,12 @@ if "var" not in st.session_state:
 col3, col4 = st.columns(2)
 
 
+def _update_session_state():
+    event = st.session_state.iris
+    if len(event.selection.points) != 0:
+        st.session_state["var"] = event.selection.points[0]["x"]
+
+
 def plot():
     df = px.data.iris()
     fig = px.scatter(
@@ -18,10 +24,10 @@ def plot():
         hover_data=["petal_width"],
     )
 
-    event = st.plotly_chart(fig, key="iris", on_select="rerun")
-    event.selection
-    if len(event.selection.points) != 0:
-        st.session_state["var"] = event.selection.points[0]["x"]
+    st.plotly_chart(fig, key="iris", on_select=_update_session_state)
+    # event.selection
+    # if len(event.selection.points) != 0:
+    #     st.session_state["var"] = event.selection.points[0]["x"]
     #  st.rerun()
 
 
