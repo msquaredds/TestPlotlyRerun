@@ -8,6 +8,8 @@ col3, col4 = st.columns(2)
 
 
 def _update_session_state():
+    df = st.session_state.df
+    st.dataframe(df)
     event = st.session_state.iris
     if len(event.selection.points) != 0:
         st.session_state["var"] = event.selection.points[0]["x"]
@@ -24,6 +26,7 @@ def plot():
         hover_data=["petal_width"],
     )
 
+    st.session_state.df = df
     st.plotly_chart(fig, key="iris", on_select=_update_session_state)
     # event.selection
     # if len(event.selection.points) != 0:
