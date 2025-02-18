@@ -7,8 +7,9 @@ if "var" not in st.session_state:
 col3, col4 = st.columns(2)
 
 
-@st.fragment
+# @st.fragment
 def _update_session_state():
+    st.stop()
     df = st.session_state.df
     st.dataframe(df)
     event = st.session_state.iris
