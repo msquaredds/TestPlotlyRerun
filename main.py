@@ -7,6 +7,7 @@ if "var" not in st.session_state:
 col3, col4 = st.columns(2)
 
 
+@st.fragment
 def _update_session_state():
     df = st.session_state.df
     st.dataframe(df)
